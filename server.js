@@ -1,9 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const stocksRouter = require('./routes/stocks');
-const acoesRouter = require('./routes/acoes');
-const atualizarPrecosAcoes = require('./utils/atualizarPrecosAcoes');
-const atualizarPrecoBitcoin = require('./utils/atualizarPrecoBitcoin');
 const atualizarPrecosCriptos = require('./utils/atualizarPrecoBitcoin');
 const inicializarAcoesPrincipais = require('./utils/inicializarAcoesPrincipais');
 require('dotenv').config();
@@ -15,14 +11,13 @@ app.use(express.json());
 require('./config/db')();
 
 // Routes
-app.use('/api/stocks', stocksRouter);
-app.use('/api/acoes', acoesRouter);
+// Apenas rota de criptos será usada
 // Atualiza preços das 50 maiores criptos de 30 em 30 segundos
 global.precosInterval = setInterval(() => {
   atualizarPrecosCriptos();
 }, 30 * 1000);
 
-// Inicializa a lista principal de 50 ações e criptos ao iniciar o servidor
+// Inicializa a lista principal de 50 criptos ao iniciar o servidor
 inicializarAcoesPrincipais();
 
 const PORT = process.env.PORT || 3000;
