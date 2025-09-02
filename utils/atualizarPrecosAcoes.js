@@ -9,11 +9,14 @@ async function atualizarPrecosAcoes() {
       const symbol = `${acao.codigo}.SAO`;
       const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`;
       const response = await axios.get(url);
-      const price = response.data["Global Quote"]["05. price"];
-      if (price) {
+      const globalQuote = response.data["Global Quote"];
+      if (globalQuote && globalQuote["05. price"]) {
+        const price = globalQuote["05. price"];
         acao.preco = parseFloat(price);
         await acao.save();
         console.log(`Preço atualizado: ${acao.codigo} = R$ ${price}`);
+      } else {
+        console.error(`Resposta inesperada da API para ${acao.codigo}:`, response.data);
       }
     } catch (err) {
       console.error(`Erro ao atualizar ${acao.codigo}:`, err.message);
