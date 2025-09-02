@@ -1,13 +1,10 @@
 const axios = require('axios');
 const Acao = require('../models/Acao');
 
-const cryptos = [
-  { codigo: 'BTC', nome: 'Bitcoin', id: 'bitcoin' },
-  { codigo: 'ETH', nome: 'Ethereum', id: 'ethereum' },
-  { codigo: 'SUI', nome: 'Sui', id: 'sui' },
-  { codigo: 'KAMINO', nome: 'Kamino', id: 'kamino-finance' },
-  { codigo: 'ENA', nome: 'Ena', id: 'ethena' }
-];
+const lista = require('./listaAcoesPrincipais');
+
+// Usar os IDs da CoinGecko presentes na lista principal
+const cryptos = lista.map(c => ({ ...c, id: c.codigo }));
 
 async function atualizarPrecosCriptos() {
   try {
@@ -17,7 +14,7 @@ async function atualizarPrecosCriptos() {
       const preco = response.data[crypto.id]?.usd;
       if (!preco) continue;
       await Acao.findOneAndUpdate(
-        { codigo: crypto.codigo },
+        { codigo: crypto.id },
         { nome: crypto.nome, preco: preco },
         { upsert: true, new: true }
       );

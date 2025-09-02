@@ -17,11 +17,10 @@ require('./config/db')();
 // Routes
 app.use('/api/stocks', stocksRouter);
 app.use('/api/acoes', acoesRouter);
-// Atualiza preços de ações e Bitcoin de 1 em 1 minuto
+// Atualiza preços das 50 maiores criptos de 30 em 30 segundos
 global.precosInterval = setInterval(() => {
-  atualizarPrecosAcoes();
   atualizarPrecosCriptos();
-}, 60 * 1000);
+}, 30 * 1000);
 
 // Inicializa a lista principal de 50 ações e criptos ao iniciar o servidor
 inicializarAcoesPrincipais();
