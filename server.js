@@ -1,3 +1,21 @@
+// Atualizar quantidade de uma cripto
+app.put('/api/criptos/:id/quantidade', async (req, res) => {
+  try {
+    const { quantidade } = req.body;
+    if (typeof quantidade !== 'number') {
+      return res.status(400).json({ error: 'Quantidade inválida' });
+    }
+    const cripto = await Cripto.findByIdAndUpdate(
+      req.params.id,
+      { quantidade },
+      { new: true }
+    );
+    if (!cripto) return res.status(404).json({ error: 'Cripto não encontrada' });
+    res.json(cripto);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar quantidade' });
+  }
+});
 const express = require('express');
 const mongoose = require('mongoose');
 const atualizarPrecosCriptos = require('./utils/atualizarPrecoBitcoin');

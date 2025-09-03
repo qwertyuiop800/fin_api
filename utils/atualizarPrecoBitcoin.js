@@ -13,9 +13,10 @@ async function atualizarPrecosCriptos() {
     for (const crypto of cryptos) {
       const preco = response.data[crypto.id]?.usd;
       if (!preco) continue;
+      // Atualiza apenas nome e preco, preservando quantidade existente
       await Cripto.findOneAndUpdate(
         { codigo: crypto.id },
-        { nome: crypto.nome, preco: preco },
+        { $set: { nome: crypto.nome, preco: preco } },
         { upsert: true, new: true }
       );
       console.log(`Preço de ${crypto.nome} atualizado: $${preco}`);
