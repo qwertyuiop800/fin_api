@@ -1,21 +1,3 @@
-// Atualizar quantidade de uma cripto
-app.put('/api/criptos/:id/quantidade', async (req, res) => {
-  try {
-    const { quantidade } = req.body;
-    if (typeof quantidade !== 'number') {
-      return res.status(400).json({ error: 'Quantidade inválida' });
-    }
-    const cripto = await Cripto.findByIdAndUpdate(
-      req.params.id,
-      { quantidade },
-      { new: true }
-    );
-    if (!cripto) return res.status(404).json({ error: 'Cripto não encontrada' });
-    res.json(cripto);
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao atualizar quantidade' });
-  }
-});
 const express = require('express');
 const mongoose = require('mongoose');
 const atualizarPrecosCriptos = require('./utils/atualizarPrecoBitcoin');
@@ -27,7 +9,6 @@ app.use(express.json());
 
 // MongoDB connection
 require('./config/db')();
-
 
 // Atualiza preços das 50 maiores criptos de 30 em 30 segundos
 global.precosInterval = setInterval(() => {
@@ -45,6 +26,25 @@ app.get('/api/criptos', async (req, res) => {
     res.json(criptos);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao buscar criptos' });
+  }
+});
+
+// Atualizar quantidade de uma cripto
+app.put('/api/criptos/:id/quantidade', async (req, res) => {
+  try {
+    const { quantidade } = req.body;
+    if (typeof quantidade !== 'number') {
+      return res.status(400).json({ error: 'Quantidade inválida' });
+    }
+    const cripto = await Cripto.findByIdAndUpdate(
+      req.params.id,
+      { quantidade },
+      { new: true }
+    );
+    if (!cripto) return res.status(404).json({ error: 'Cripto não encontrada' });
+    res.json(cripto);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar quantidade' });
   }
 });
 
