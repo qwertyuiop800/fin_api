@@ -10,8 +10,7 @@ app.use(express.json());
 // MongoDB connection
 require('./config/db')();
 
-// Routes
-// Apenas rota de criptos será usada
+
 // Atualiza preços das 50 maiores criptos de 30 em 30 segundos
 global.precosInterval = setInterval(() => {
   atualizarPrecosCriptos();
@@ -19,6 +18,17 @@ global.precosInterval = setInterval(() => {
 
 // Inicializa a lista principal de 50 criptos ao iniciar o servidor
 inicializarAcoesPrincipais();
+
+// Rota para retornar todas as criptos
+const Cripto = require('./models/Cripto');
+app.get('/api/criptos', async (req, res) => {
+  try {
+    const criptos = await Cripto.find();
+    res.json(criptos);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar criptos' });
+  }
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -7,4 +7,4 @@ const AcaoSchema = new mongoose.Schema({
   quantidade: { type: Number, default: 0 },
 });
 
-module.exports = mongoose.model('Acao', AcaoSchema);
+module.exports = mongoose.model('Cripto', AcaoSchema);

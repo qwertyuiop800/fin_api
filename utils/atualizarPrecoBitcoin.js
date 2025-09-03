@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Acao = require('../models/Acao');
+const Cripto = require('../models/Cripto');
 
 const lista = require('./listaAcoesPrincipais');
 
@@ -13,7 +13,7 @@ async function atualizarPrecosCriptos() {
     for (const crypto of cryptos) {
       const preco = response.data[crypto.id]?.usd;
       if (!preco) continue;
-      await Acao.findOneAndUpdate(
+      await Cripto.findOneAndUpdate(
         { codigo: crypto.id },
         { nome: crypto.nome, preco: preco },
         { upsert: true, new: true }

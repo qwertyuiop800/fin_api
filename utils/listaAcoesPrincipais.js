@@ -1,4 +1,5 @@
 module.exports = [
+  // Lista atualizada das 50 maiores criptos pelo CoinGecko em setembro de 2025
   { codigo: 'bitcoin', nome: 'Bitcoin', preco: 0, quantidade: 0 },
   { codigo: 'ethereum', nome: 'Ethereum', preco: 0, quantidade: 0 },
   { codigo: 'tether', nome: 'Tether', preco: 0, quantidade: 0 },
@@ -12,11 +13,9 @@ module.exports = [
   { codigo: 'wrapped-steth', nome: 'Wrapped stETH', preco: 0, quantidade: 0 },
   { codigo: 'chainlink', nome: 'Chainlink', preco: 0, quantidade: 0 },
   { codigo: 'wrapped-beacon-eth', nome: 'Wrapped Beacon ETH', preco: 0, quantidade: 0 },
-  { codigo: 'wrapped-bitcoin', nome: 'Wrapped Bitcoin', preco: 0, quantidade: 0 },
   { codigo: 'ethena-usde', nome: 'Ethena USDe', preco: 0, quantidade: 0 },
   { codigo: 'figure-heloc', nome: 'Figure Heloc', preco: 0, quantidade: 0 },
   { codigo: 'hyperliquid', nome: 'Hyperliquid', preco: 0, quantidade: 0 },
-  { codigo: 'sui', nome: 'Sui', preco: 0, quantidade: 0 },
   { codigo: 'wrapped-eeth', nome: 'Wrapped eETH', preco: 0, quantidade: 0 },
   { codigo: 'bitcoin-cash', nome: 'Bitcoin Cash', preco: 0, quantidade: 0 },
   { codigo: 'stellar', nome: 'Stellar', preco: 0, quantidade: 0 },
@@ -44,7 +43,6 @@ module.exports = [
   { codigo: 'pepe', nome: 'Pepe', preco: 0, quantidade: 0 },
   { codigo: 'mantle', nome: 'Mantle', preco: 0, quantidade: 0 },
   { codigo: 'okb', nome: 'OKB', preco: 0, quantidade: 0 },
-  { codigo: 'ethereum-classic', nome: 'Ethereum Classic', preco: 0, quantidade: 0 },
   { codigo: 'jito-staked-sol', nome: 'Jito Staked SOL', preco: 0, quantidade: 0 },
   { codigo: 'bittensor', nome: 'Bittensor', preco: 0, quantidade: 0 },
   { codigo: 'pol', nome: 'POL (ex-MATIC)', preco: 0, quantidade: 0 }

@@ -1,20 +1,20 @@
-const Acao = require('../models/Acao');
+const Cripto = require('../models/Cripto');
 const lista = require('./listaAcoesPrincipais');
 
-async function inicializarAcoesPrincipais() {
-  for (const acao of lista) {
-    await Acao.findOneAndUpdate(
-      { codigo: acao.codigo },
+async function inicializarCriptosPrincipais() {
+  for (const cripto of lista) {
+    await Cripto.findOneAndUpdate(
+      { codigo: cripto.codigo },
       {
-        nome: acao.nome,
-        codigo: acao.codigo,
-        preco: acao.preco || 0,
-        quantidade: acao.quantidade || 0
+        nome: cripto.nome,
+        codigo: cripto.codigo,
+        preco: cripto.preco || 0,
+        quantidade: cripto.quantidade || 0
       },
-      { upsert: true }
+      { upsert: true, new: true }
     );
   }
-  console.log('Lista principal de ações e criptos inicializada!');
+  console.log('Lista principal de criptos inicializada!');
 }
 
-module.exports = inicializarAcoesPrincipais;
+module.exports = inicializarCriptosPrincipais;
